@@ -1,7 +1,23 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { use } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../FirebaseAuth/AuthContext';
+import { Tooltip } from 'react-tooltip';
 
 const Navbar = () => {
+
+    const { loggedInUser, setLoggedInUser, logOut } = use(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                // Sign-out successful.
+                setLoggedInUser(null);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }
+
+    const navigate = useNavigate();
 
     const navItems = <>
         <li>
@@ -42,11 +58,13 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
 
-                <img className="w-10 rounded-full mr-2"
-                    alt="Tailwind CSS Navbar component"
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                <img data-tooltip-id="my-tooltip"
+                        data-tooltip-content={loggedInUser?.displayName} className='w-10 h-10 rounded-full mr-2' src={loggedInUser ? loggedInUser.photoURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} alt="" />
+                <Tooltip id="my-tooltip" />
 
-                <Link to="/login" className="btn">Login</Link>
+                {
+                    (loggedInUser?.uid) ? <button onClick={handleLogOut} className="btn">LogOut</button> : <button onClick={() => navigate('/login')} className="btn">Login</button>
+                }
             </div>
         </div>
     );
