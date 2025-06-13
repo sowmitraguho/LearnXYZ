@@ -1,19 +1,21 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router';
 
 const Navbar = () => {
 
-    const Links = <>
-    <li><a>Item 1</a></li>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <li><a>Item 3</a></li>
+    const navItems = <>
+        <li>
+            <NavLink to='/'>Home</NavLink>
+        </li>
+        <li>
+            <NavLink to='/allgroup'>All Group</NavLink>
+        </li>
+        <li>
+            <NavLink to={`/mygroup/`}>My Group</NavLink>
+        </li>
+        <li>
+            <NavLink to='/creategroup'>Create Group</NavLink>
+        </li>
     </>
 
 
@@ -28,26 +30,23 @@ const Navbar = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li><a>Item 1</a></li>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        {navItems}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">LearnXYZ</a>
+                <Link to="/" className="btn btn-ghost text-xl">LearnXYZ</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    
+                    {navItems}
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+
+                <img className="w-10 rounded-full mr-2"
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+
+                <Link to="/login" className="btn">Login</Link>
             </div>
         </div>
     );
