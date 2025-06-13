@@ -7,6 +7,7 @@ import Login from './Components/Login/Login.jsx'
 import Register from './Components/Register/Register.jsx'
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx'
 import Home from './Components/Home/Home.jsx'
+import AuthProvider from './FirebaseAuth/AuthProvider.jsx'
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
