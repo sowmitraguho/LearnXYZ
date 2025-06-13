@@ -8,6 +8,7 @@ import Register from './Components/Register/Register.jsx'
 import ErrorPage from './Components/ErrorPage/ErrorPage.jsx'
 import Home from './Components/Home/Home.jsx'
 import AuthProvider from './FirebaseAuth/AuthProvider.jsx'
+import ThemeProvider from './Contexts/ThemeProvider.jsx'
 
 
 const router = createBrowserRouter([
@@ -20,14 +21,14 @@ const router = createBrowserRouter([
         loader: () => fetch(''),
         Component: Home
       },
-      
+
       {
         path: 'login',
-        Component: Login, 
+        Component: Login,
       },
       {
         path: 'register',
-        Component: Register, 
+        Component: Register,
       },
       {
         path: '*',
@@ -39,8 +40,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ThemeProvider>
+
   </StrictMode>,
 )
