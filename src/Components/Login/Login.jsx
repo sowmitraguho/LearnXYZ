@@ -2,6 +2,8 @@ import React, { use } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
+import Lottie from 'lottie-react';
+import signInLottie from '../../assets/Lotties/signIn.json'
 
 const Login = () => {
 
@@ -61,8 +63,9 @@ const Login = () => {
                         <p className="py-6">
                             We're excited to have you here. Join us and start exploring new hobbies, connecting with like-minded people, and being part of something amazing!
                         </p>
+                        <Lottie style={{ width: '350px' }} loop={true} animationData={signInLottie} />
                     </div>
-                    <div className="card bg-base-100 w-full mx-auto max-w-full lg:max-w-sm shrink-0 shadow-2xl">
+                    <div className="card bg-base-100 w-full mx-auto max-w-full lg:max-w-sm shrink-0 shadow-2xl justify-self-center border border-green-500">
                         <div className="card-body">
                             <form onSubmit={handleSignIn}>
                                 <fieldset className="fieldset">

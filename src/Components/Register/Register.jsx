@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import Swal from 'sweetalert2';
+import Lottie from 'lottie-react';
+import registerLottie from '../../assets/Lotties/register.json'
 
 const Register = () => {
 
@@ -46,14 +48,15 @@ const Register = () => {
     return (
         <div className='mx-auto'>
             <div className="hero bg-base-200 min-h-screen">
-                <div className="hero-content grid grid-cols-1 md:grid-cols-2">
+                <div className="hero-content grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-between">
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold">Sign Up Now!</h1>
                         <p className="py-6">
                             We're excited to have you here. Join us and start exploring new hobbies, connecting with like-minded people, and being part of something amazing!
                         </p>
+                        <Lottie style={{ width: '350px' }} loop={true} animationData={registerLottie} />
                     </div>
-                    <div className="card bg-base-100 w-full max-w-full md:max-w-sm shrink-0 shadow-2xl">
+                    <div className="card bg-base-100 w-full max-w-full md:max-w-sm justify-self-center shadow-2xl border border-green-500">
                         <div className="card-body">
                             <form onSubmit={handleRegister}>
                                 <fieldset className="fieldset">
