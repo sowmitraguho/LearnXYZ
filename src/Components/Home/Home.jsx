@@ -1,13 +1,17 @@
-import React from 'react';
+
 import Banner from '../Banner/Banner';
 import TypeWriterEffects from '../TypeWriterEffects/TypeWriterEffects';
 
+import PopularServices from '../PopularServices/PopularServices';
+
 
 const Home = () => {
+   
     return (
         <div>
-            <TypeWriterEffects/>
+            <TypeWriterEffects />
             <Banner />
+            <PopularServices/>
         </div>
     );
 };
