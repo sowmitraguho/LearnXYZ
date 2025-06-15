@@ -18,7 +18,7 @@ const PopularServices = () => {
     }, [])
     return (
       
-            <div className='px-24 py-20'>
+            <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
                 <h2 className="text-3xl font-semibold text-blue-600 mb-10">Popular Services</h2>
                 <div className="grid grid-cols-1 gap-4">
                     {
