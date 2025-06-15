@@ -9,6 +9,7 @@ import ErrorPage from './Components/ErrorPage/ErrorPage.jsx'
 import Home from './Components/Home/Home.jsx'
 import AuthProvider from './FirebaseAuth/AuthProvider.jsx'
 import ThemeProvider from './Contexts/ThemeProvider.jsx'
+import AddService from './Pages/AddService/AddService.jsx'
 
 
 const router = createBrowserRouter([
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
         loader: () => fetch(''),
         Component: Home
       },
-
+      {
+        path: 'addservice',
+        Component: AddService
+      },
       {
         path: 'login',
         Component: Login,
