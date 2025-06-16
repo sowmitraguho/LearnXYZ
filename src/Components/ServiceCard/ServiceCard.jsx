@@ -15,7 +15,7 @@ const ServiceCard = ({ service }) => {
                         <div className="service-provider my-4 shadow-sm border border-gray-300 w-60 p-2 rounded-md">
                             <h4 className='font-semibold mb-1'>Mentored by:</h4>
                             <div className="profile flex items-center gap-2">
-                                <img className='rounded-full w-10' src={providerImage} alt="" />
+                                <img className='rounded-full w-10 h-10' src={providerImage} alt="" />
                                 <p className='font-semibold'>{providerName}</p>
                             </div>
                         </div>

@@ -7,11 +7,11 @@ import { ThemeContext } from '../../Contexts/ThemeContext';
 const Navbar = () => {
 
     const { loggedInUser, setLoggedInUser, logOut } = use(AuthContext);
-    const { theme, setTheme} = useContext(ThemeContext);
+    const { theme, setTheme } = useContext(ThemeContext);
 
     //Theme settings
     const handleToggle = (e) => {
-        if(e.target.checked) {
+        if (e.target.checked) {
             setTheme('dark')
         } else {
             setTheme('light')
@@ -22,12 +22,12 @@ const Navbar = () => {
         const localTheme = localStorage.getItem('theme');
         document.querySelector('html').setAttribute("data-theme", localTheme);
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.querySelector('html').classList.add('dark');
-    } else {
-        document.documentElement.classList.remove('dark');
-        document.querySelector('html').classList.remove('dark');
-    }
+            document.documentElement.classList.add('dark');
+            document.querySelector('html').classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.querySelector('html').classList.remove('dark');
+        }
     }, [theme])
 
     const handleLogOut = () => {
@@ -47,11 +47,19 @@ const Navbar = () => {
             <NavLink to='/'>Home</NavLink>
         </li>
         <li>
-            <NavLink to='/allgroup'>All Group</NavLink>
+            <NavLink to='/allservices'>Services</NavLink>
         </li>
         <li>
-            <NavLink to={`/mygroup/`}>My Group</NavLink>
-        </li>
+        <details>
+          <summary>Dashboard</summary>
+          <ul className="p-2 w-50">
+            <li><NavLink to='/addservice'>Add Service</NavLink></li>
+            <li><NavLink>Manage Sevice</NavLink></li>
+            <li><NavLink>Booked Sevice</NavLink></li>
+            <li><NavLink>Sevice To Do</NavLink></li>
+          </ul>
+        </details>
+      </li>
         <li>
             <NavLink to='/creategroup'>Create Group</NavLink>
         </li>
@@ -68,7 +76,7 @@ const Navbar = () => {
                     </div>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-60 p-2 shadow">
                         {navItems}
                     </ul>
                 </div>

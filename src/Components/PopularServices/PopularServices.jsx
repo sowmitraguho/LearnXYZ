@@ -8,7 +8,7 @@ const PopularServices = () => {
         axios.get('https://learnxyz-server.onrender.com/allservices')
             .then((result) => {
                 // handle success
-                console.log(result.data);
+               //console.log(result.data);
                 setAllServices(result.data);
             })
             .catch(function (error) {

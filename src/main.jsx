@@ -10,6 +10,7 @@ import Home from './Components/Home/Home.jsx'
 import AuthProvider from './FirebaseAuth/AuthProvider.jsx'
 import ThemeProvider from './Contexts/ThemeProvider.jsx'
 import AddService from './Pages/AddService/AddService.jsx'
+import AllServices from './Pages/AllServices/AllServices.jsx'
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: 'addservice',
         Component: AddService
+      },
+      {
+        path: 'allservices',
+        Component: AllServices
       },
       {
         path: 'login',
