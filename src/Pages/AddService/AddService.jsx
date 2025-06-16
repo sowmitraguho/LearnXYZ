@@ -1,10 +1,9 @@
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import axios from 'axios';
 
 const AddService = () => {
     const { loggedInUser } = use(AuthContext);
-    //const [serviceInfo, setServiceInfo] = useState({});
 
     const handleAddService = (e) => {
         e.preventDefault();
