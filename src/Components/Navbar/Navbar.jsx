@@ -52,9 +52,9 @@ const Navbar = () => {
         <li>
         <details>
           <summary>Dashboard</summary>
-          <ul className="p-2 w-50">
+          <ul className="p-2 w-50 z-10">
             <li><NavLink to='/addservice'>Add Service</NavLink></li>
-            <li><NavLink>Manage Sevice</NavLink></li>
+            <li><NavLink to='/myservices'>Manage Sevice</NavLink></li>
             <li><NavLink>Booked Sevice</NavLink></li>
             <li><NavLink>Sevice To Do</NavLink></li>
           </ul>

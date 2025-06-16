@@ -13,22 +13,27 @@ const AuthProvider = ({children}) => {
     const [loggedInUser, setLoggedInUser] = useState(auth.currentUser);
 
     const createUser = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const updateUser = (updatedUserData) => {
         console.log('inside update user', updatedUserData);
+        setLoading(true);
         return updateProfile(auth.currentUser, updatedUserData);
     }
     const signIn = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
     const googleSignIn = () => {
+        setLoading(true);
         signInWithPopup(auth, provider);
     }
 
     
 
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
 
