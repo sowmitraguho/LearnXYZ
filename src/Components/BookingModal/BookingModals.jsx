@@ -10,6 +10,7 @@ const BookingModals = ({ serviceData, handleCloseModal }) => {
         const form = e.target;
         const data = new FormData(form);
         const confirmedData = Object.fromEntries(data.entries());
+        confirmedData.status = 'pending';
         console.log('form submitted', confirmedData);
         axios.post('https://learnxyz-server.onrender.com/bookedServices', confirmedData)
             .then(res => {

@@ -15,6 +15,8 @@ import ManageServices from './Pages/ManageServices/ManageServices.jsx'
 import UpdateService from './Pages/UpdateService/UpdateService.jsx'
 import axios from 'axios'
 import ServiceDetails from './Pages/SeviceDetails/ServiceDetails.jsx'
+import BookedService from './Pages/BookedService/BookedService.jsx'
+import ServiceTodo from './Pages/ServiceTodo/ServiceTodo.jsx'
 
 
 const router = createBrowserRouter([
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
       {
         path: 'myservices',
         Component: ManageServices
+      },
+      {
+        path: 'bookedservices',
+        Component: BookedService
+      },
+      {
+        path: 'servicestodo',
+        Component: ServiceTodo
       },
       {
         path: 'login',
