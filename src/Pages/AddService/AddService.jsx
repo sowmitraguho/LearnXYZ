@@ -2,6 +2,7 @@ import React, { use } from 'react';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet';
 
 const AddService = () => {
     const { loggedInUser } = use(AuthContext);
@@ -31,6 +32,10 @@ const AddService = () => {
 
 
     return (
+        <>
+        <Helmet>
+            <title>Add Service</title>
+        </Helmet>
         <div className='mx-4 my-4 lg:mx-20 md:my-10 border border-gray-300 shadow-md p-4 lg:p-10 rounded-2xl'>
             <h1 className="text-4xl font-bold my-4 text-blue-500 text-center pb-4">Add A New Service</h1>
             <form onSubmit={handleAddService}>
@@ -87,6 +92,7 @@ const AddService = () => {
             </form>
 
         </div>
+        </>
     );
 };
 

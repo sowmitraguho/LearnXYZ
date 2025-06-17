@@ -2,9 +2,10 @@ import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import axios from 'axios';
 import BookedServiceCard from '../../Components/BookedServiceCard/BookedServiceCard';
+import { Helmet } from 'react-helmet';
 
 const ServiceTodo = () => {
-
+    const [changeStat, setChangeStat] = useState(true);
     const { loggedInUser, loading } = use(AuthContext);
     const [allServices, setAllServices] = useState([]);
     useEffect(() => {
@@ -37,11 +38,14 @@ const ServiceTodo = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Service To do</title>
+            </Helmet>
             <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
                 <h2 className="text-3xl font-semibold text-blue-600 mb-10 dark:text-white">Services Provided By You</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {
-                        allServices.map(service => <BookedServiceCard key={service._id} service={service} />)
+                        allServices.map(service => <BookedServiceCard key={service._id} service={service} changeStat={changeStat} />)
                     }
                 </div>
 

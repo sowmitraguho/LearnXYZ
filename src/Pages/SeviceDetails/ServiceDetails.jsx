@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { FaDiscord, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import BookingModals from '../../Components/BookingModal/BookingModals';
+import { Helmet } from 'react-helmet';
 
 const ServiceDetails = () => {
     const { loggedInUser } = use(AuthContext);
@@ -37,7 +38,9 @@ const ServiceDetails = () => {
     }
     return (
         <div className='p-8 lg:p-24'>
-
+            <Helmet>
+                <title>Course Details</title>
+            </Helmet>
             <section className='flex flex-col-reverse lg:flex-row gap-6 items-center justify-between shadow-xl border border-gray-200 dark:border-gray-900 p-4 md:p-12  bg-white dark:bg-gray-900'>
                 <div className="left-section w-full max-w-full">
                     <h1 className="text-3xl md:text-4xl font-bold dark:text-white">{serviceData.serviceName}</h1>

@@ -4,6 +4,7 @@ import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import Swal from 'sweetalert2';
 import Lottie from 'lottie-react';
 import registerLottie from '../../assets/Lotties/register.json'
+import { Helmet } from 'react-helmet';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -56,6 +57,10 @@ const Register = () => {
 
 
     return (
+        <>
+        <Helmet>
+            <title>Register</title>
+        </Helmet>
         <div className='mx-auto'>
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content grid grid-cols-1 md:grid-cols-2 gap-4 items-center justify-between">
@@ -92,6 +97,7 @@ const Register = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

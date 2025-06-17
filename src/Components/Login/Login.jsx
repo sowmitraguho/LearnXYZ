@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import Lottie from 'lottie-react';
 import signInLottie from '../../assets/Lotties/signIn.json'
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
 
@@ -56,6 +57,9 @@ const Login = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className="hero bg-base-200 min-h-screen">
                 <div className="hero-content grid grid-cols-1 lg:grid-cols-2">
                     <div className="text-center lg:text-left">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ServiceCard from '../../Components/ServiceCard/ServiceCard';
+import { Helmet } from 'react-helmet';
 
 const AllServices = () => {
     const [allServices, setAllServices] = useState([]);
@@ -17,7 +18,12 @@ const AllServices = () => {
             })
     }, [])
     return (
+        <>
+        <Helmet>
+            <title>All Services</title>
+        </Helmet>
         <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
+            
                 <h2 className="text-3xl font-semibold text-blue-600 mb-10 dark:text-white">All Services</h2>
                 <div className="grid grid-cols-1 gap-4">
                     {
@@ -26,6 +32,8 @@ const AllServices = () => {
                 </div>
 
             </div>
+        
+        </>
     );
 };
 

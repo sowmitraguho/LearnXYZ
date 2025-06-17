@@ -3,16 +3,18 @@ import { AuthContext } from '../../FirebaseAuth/AuthContext';
 import axios from 'axios';
 import MyServiceCard from '../../Components/MyServiceCard/MyServiceCard';
 import BookedServiceCard from '../../Components/BookedServiceCard/BookedServiceCard';
-import { div } from 'motion/react-client';
+
 import { Link } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 const BookedService = () => {
 
-    const { loggedInUser, loading } = use(AuthContext);
+    const { loggedInUser, loading, setLoading } = use(AuthContext);
     // console.log('from booked servicd', loggedInUser.accessToken)
     const [allServices, setAllServices] = useState([]);
     useEffect(() => {
         if (!loggedInUser?.email) return;
+        
         axios.get(`https://learnxyz-server.onrender.com/bookedServices/${loggedInUser.email}`, {
             headers: {
                 Authorization: `Bearer ${loggedInUser.accessToken}`
@@ -22,12 +24,13 @@ const BookedService = () => {
                 // handle success
                 //console.log(result.data);
                 setAllServices(result.data);
+                
             })
             .catch(function (error) {
                 // handle error
                 console.log(error);
             })
-    }, [loggedInUser?.email])
+    }, [loggedInUser?.email, loggedInUser.accessToken, loading, setLoading])
     if (loading) {
         return <>
             <span className="loading loading-spinner text-primary"></span>
@@ -44,6 +47,9 @@ const BookedService = () => {
 
     return (
         <div>
+            <Helmet>
+            <title>Booked Services</title>
+            </Helmet>
             <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
                 <h2 className="text-3xl font-semibold text-blue-600 mb-10 dark:text-white">Services Purchased By You</h2>
                 {

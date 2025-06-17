@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 
@@ -34,6 +35,10 @@ const UpdateService = () => {
         
     }
     return (
+         <>
+         <Helmet>
+            <title>Update Course</title>
+         </Helmet>
          <div className='mx-4 my-4 lg:mx-20 md:my-10 border border-gray-300 shadow-md p-4 lg:p-10 rounded-2xl'>
             <h1 className="text-4xl font-bold my-4 text-blue-500 text-center pb-4">Update Your Service</h1>
             <form onSubmit={handleUpdateService}>
@@ -64,6 +69,7 @@ const UpdateService = () => {
             </form>
 
         </div>
+         </>
     );
 };
 

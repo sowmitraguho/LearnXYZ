@@ -3,7 +3,7 @@ import React, { use } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
 
-const BookedServiceCard = ({ service }) => {
+const BookedServiceCard = ({ service, changeStat }) => {
     const { loggedInUser } = use(AuthContext);
     const { imageUrl, price, providerImage, providerName, serviceArea, serviceName } = service;
     const handleChangeStatus = async () => {
@@ -43,7 +43,9 @@ const BookedServiceCard = ({ service }) => {
                             <p className='text-purple-700 font-semibold mb-1 dark:text-green-400'>{serviceArea}</p>
                             <h2 className='font-semibold text-violet-800 dark:text-green-400 mb-1'>Course Fee: ${price}</h2>
                             <p className="mb-2">Status: {service.status}</p>
-                            <button onClick={handleChangeStatus} type="button" className='text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>Change Status</button>
+                            {
+                                changeStat ? <button onClick={handleChangeStatus} type="button" className='text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 shadow-lg shadow-lime-500/50 dark:shadow-lg dark:shadow-lime-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>Change Status</button> : <></>
+                            }
                         </div>
                         <div className="flex flex-col md:flex-row justify-between md:items-center">
                             <div className="service-provider my-4 shadow-sm border border-gray-300 w-40 p-2 rounded-md">

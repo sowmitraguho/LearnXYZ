@@ -3,6 +3,7 @@ import React, { use, useEffect, useState } from 'react';
 
 import MyServiceCard from '../../Components/MyServiceCard/MyServiceCard';
 import { AuthContext } from '../../FirebaseAuth/AuthContext';
+import { Helmet } from 'react-helmet';
 
 const ManageServices = () => {
     const { loggedInUser, loading } = use(AuthContext);
@@ -35,6 +36,10 @@ const ManageServices = () => {
         </>
     }
     return (
+        <>
+        <Helmet>
+            <title>Manage Services</title>
+        </Helmet>
         <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
             <h2 className="text-3xl font-semibold text-blue-600 mb-10 dark:text-white">Services Provided By You</h2>
             <div className="grid grid-cols-1 gap-4">
@@ -44,6 +49,7 @@ const ManageServices = () => {
             </div>
 
         </div>
+        </>
     );
 };
 
