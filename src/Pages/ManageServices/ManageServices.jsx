@@ -14,7 +14,7 @@ const ManageServices = () => {
         axios.get(`https://learnxyz-server.onrender.com/myservices/${loggedInUser.email}`)
             .then((result) => {
                 // handle success
-                console.log(result.data);
+                //console.log(result.data);
                 setAllServices(result.data);
             })
             .catch(function (error) {

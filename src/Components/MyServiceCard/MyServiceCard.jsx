@@ -1,9 +1,16 @@
 import axios from 'axios';
 import React from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router';
 
 const MyServiceCard = ({ service }) => {
-    const {_id, imageUrl, description, price, providerImage, providerName, serviceArea, serviceName } = service;
+    const { imageUrl, description, price, providerImage, providerName, serviceArea, serviceName } = service;
+    //console.log('my service',_id);
+    const navigate = useNavigate();
+    const handleUpdate = (id) => {
+        navigate(`/updateservice/${id}`);
+    };
+
     const handleDeleteService = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -16,17 +23,17 @@ const MyServiceCard = ({ service }) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(`https://learnxyz-server.onrender.com/services/${id}`)
-                .then(res => {
-                     console.log('after deleted',res);
-                    Swal.fire({
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-                })  
+                    .then(res => {
+                        console.log('after deleted', res);
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                    })
             }
         });
-        
+
     }
     return (
         <div>
@@ -47,8 +54,8 @@ const MyServiceCard = ({ service }) => {
                         </div>
                         <div>
                             <h2 className='font-semibold text-violet-800 dark:text-green-400 text-lg mb-1 text-right'>Course Fee: ${price}</h2>
-                            <button type="button" className="w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2">Update</button>
-                            <button onClick={()=>handleDeleteService(_id)} type="button" className="w-50 text-white font-bold bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center mb-2">Delete</button>
+                            <button onClick={() => handleUpdate(service._id)} type="button" className="w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2">Update</button>
+                            <button onClick={() => handleDeleteService(service._id)} type="button" className="w-50 text-white font-bold bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center mb-2">Delete</button>
                         </div>
                     </div>
 

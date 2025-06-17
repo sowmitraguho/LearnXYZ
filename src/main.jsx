@@ -12,6 +12,8 @@ import ThemeProvider from './Contexts/ThemeProvider.jsx'
 import AddService from './Pages/AddService/AddService.jsx'
 import AllServices from './Pages/AllServices/AllServices.jsx'
 import ManageServices from './Pages/ManageServices/ManageServices.jsx'
+import UpdateService from './Pages/UpdateService/UpdateService.jsx'
+import axios from 'axios'
 
 
 const router = createBrowserRouter([
@@ -27,6 +29,11 @@ const router = createBrowserRouter([
       {
         path: 'addservice',
         Component: AddService
+      },
+      {
+        path: 'updateservice/:id',
+        Component: UpdateService,
+        loader: ({params}) => axios.get(`https://learnxyz-server.onrender.com/services/${params.id}`)
       },
       {
         path: 'allservices',
