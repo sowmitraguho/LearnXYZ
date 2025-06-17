@@ -42,9 +42,9 @@ const ServiceDetails = () => {
                 <div className="left-section w-full max-w-full">
                     <h1 className="text-3xl md:text-4xl font-bold dark:text-white">{serviceData.serviceName}</h1>
                     <h2 className="text-2xl my-2 flex items-center gap-2">Course Fee: <span className='text-blue-600 font-extrabold text-4xl'>${serviceData.price}</span> </h2>
-                    <p className="text-xl mb-2">Course Category: <span className='font-semibold'>{serviceData.serviceArea}</span> </p>
-                    <p className="text-xl mb-2">Course Duration: <span className='text-purple-600 font-semibold'>125 hours</span></p>
-                    <p className='mb-2 text-lg font-semibold' >Ratings: <span className='text-green-600 dark:text-yellow-200'>4.5</span> </p>
+                    <p className="text-xl mb-2">Course Category: <span className='font-semibold'>{serviceData.serviceType? serviceData.serviceType : serviceData.serviceArea}</span> </p>
+                    <p className="text-xl mb-2">Course Duration: <span className='text-purple-600 font-semibold'>{serviceData.courseDuration ? serviceData.courseDuration : '110 Hours'}</span></p>
+                    <p className='mb-2 text-lg font-semibold' >Ratings: <span className='text-green-600 dark:text-yellow-200'>{serviceData.rating ? serviceData.rating : '4.5'}</span> </p>
                     <button onClick={handleEnrollment} disabled={booked} type="button" className='w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed'>Enroll Now</button>
                 </div>
                 <div className="right-section w-full">
@@ -61,10 +61,10 @@ const ServiceDetails = () => {
                         <p className="text-xl my-2">Course Instructor: <span className='text-green-400 font-semibold'>{serviceData.providerName}</span></p>
                         <h2 className="text-xl my-2 flex items-center gap-2">Course Fee: <span className='text-blue-600 font-bold text-2xl'>${serviceData.price}</span> </h2>
                         <p className="text-xl mb-2">Course Category: <span className='font-semibold'>{serviceData.serviceArea}</span> </p>
-                        <p className="text-xl mb-2">Course Duration: <span className=' font-semibold'>125 hours</span></p>
+                        <p className="text-xl mb-2">Course Duration: <span className=' font-semibold'>{serviceData.courseDuration ? serviceData.courseDuration : '110 Hours'}</span></p>
                     </div>
                     <div>
-                        <p className="text-xl mb-2">Course Expire: <span className=' font-semibold'>12/12/2026</span></p>
+                        <p className="text-xl mb-2">Course Expire: <span className=' font-semibold'>{serviceData.courseExpire ? serviceData.courseExpire : '12/12/2026'}</span></p>
                         <p className="text-xl mb-2">Students: <span className=' font-semibold'>2000+</span></p>
                         <p className="text-xl mb-2">Language: <span className=' font-semibold'>English</span></p>
                     </div>

@@ -16,13 +16,14 @@ const PopularServices = () => {
                 console.log(error);
             })
     }, [])
+    const popularServices = allServices.filter(service => service.rating >= 4.5);
     return (
       
             <div className='px-6 md:px-16 lg:px-24 py-12 lg:py-20'>
                 <h2 className="text-3xl font-semibold text-blue-600 mb-10 dark:text-white">Popular Services</h2>
                 <div className="grid grid-cols-1 gap-4">
                     {
-                        allServices.map(service => <ServiceCard key={service._id} service={service} />)
+                        popularServices.map(service => <ServiceCard key={service._id} service={service} />)
                     }
                 </div>
 

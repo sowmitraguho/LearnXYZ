@@ -49,7 +49,7 @@ const Navbar = () => {
         <li>
             <NavLink to='/allservices'>Services</NavLink>
         </li>
-        <li>
+        <li className={loggedInUser ? 'flex flex-col' : 'hidden'}>
         <details>
           <summary>Dashboard</summary>
           <ul className="p-2 w-50 z-10">
@@ -60,9 +60,7 @@ const Navbar = () => {
           </ul>
         </details>
       </li>
-        <li>
-            <NavLink to='/creategroup'>Create Group</NavLink>
-        </li>
+        
     </>
 
 

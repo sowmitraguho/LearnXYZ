@@ -17,6 +17,7 @@ import axios from 'axios'
 import ServiceDetails from './Pages/SeviceDetails/ServiceDetails.jsx'
 import BookedService from './Pages/BookedService/BookedService.jsx'
 import ServiceTodo from './Pages/ServiceTodo/ServiceTodo.jsx'
+import PrivateRoute from './Router/PrivateRoute.jsx'
 
 
 const router = createBrowserRouter([
@@ -31,11 +32,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'addservice',
-        Component: AddService
+        element: <PrivateRoute><AddService></AddService></PrivateRoute>
       },
       {
         path: 'updateservice/:id',
-        Component: UpdateService,
+        element: <PrivateRoute> <UpdateService></UpdateService> </PrivateRoute> ,
         loader: ({params}) => axios.get(`https://learnxyz-server.onrender.com/services/${params.id}`)
       },
       {
@@ -44,20 +45,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'servicedetails/:id',
-        Component: ServiceDetails,
+        element: <PrivateRoute> <ServiceDetails></ServiceDetails> </PrivateRoute>,
         loader: ({params}) => axios.get(`https://learnxyz-server.onrender.com/services/${params.id}`)
       },
       {
         path: 'myservices',
-        Component: ManageServices
+        element: <PrivateRoute> <ManageServices></ManageServices> </PrivateRoute> 
+        
       },
       {
         path: 'bookedservices',
-        Component: BookedService
+        element: <PrivateRoute> <BookedService></BookedService> </PrivateRoute> 
       },
       {
         path: 'servicestodo',
-        Component: ServiceTodo
+        element: <PrivateRoute> <ServiceTodo></ServiceTodo> </PrivateRoute> 
       },
       {
         path: 'login',
