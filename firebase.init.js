@@ -5,14 +5,7 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBE5wggI4emLurfUtIDAyrsUeMwG5kv0xk",
-  authDomain: "learnxyz-73605.firebaseapp.com",
-  projectId: "learnxyz-73605",
-  storageBucket: "learnxyz-73605.firebasestorage.app",
-  messagingSenderId: "901015777334",
-  appId: "1:901015777334:web:d3234941e0095b17142897"
-};
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.10",
     "axios": "^1.10.0",
     "daisyui": "^5.0.43",
+    "dotenv": "^16.5.0",
     "firebase": "^11.9.1",
     "lottie-react": "^2.4.1",
     "motion": "^12.18.1",

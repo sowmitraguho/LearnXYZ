@@ -71,10 +71,7 @@ const BookedService = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <h1 className="text-3xl font-semibold text-red-300 my-20"></h1>
-                            <Link to="/allcourses" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
-                                Explore Courses
-                            </Link> */}
+                           
                         </div>
                 }
 

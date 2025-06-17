@@ -15,7 +15,7 @@ const Banner = () => {
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white uppercase">The <motion.span animate={{ color: ["#3C65F5", "#3B25C5", "#ffcc33"], transition: { duration: 8, repeat: Infinity } }} >World's #1 Online</motion.span> Education Platform</h1>
                         <p className="max-w-2xl mb-6 font-normal text-white lg:mb-8 md:text-lg lg:text-xl "> Learn from Experts. Teach with Passion. Education, Anywhere. Anytime.</p>
 
-                        <Link to="/allcourses" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
+                        <Link to="/allservices" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
                             Explore Courses
                         </Link>
                     </div>
@@ -38,7 +38,7 @@ const Banner = () => {
                         <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white uppercase"><motion.span animate={{ color: ["#3C65F5", "#3B25C5", "#ffcc33"], transition: { duration: 8, repeat: Infinity } }} >Skills </motion.span> that drive you forward</h1>
                         <p className="max-w-2xl mb-6 font-normal text-white lg:mb-8 md:text-lg lg:text-xl "> Technology and the world of work change fast — with us, you’re faster. Get the skills to achieve goals and stay competitive.</p>
 
-                        <Link to="/allcourses" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
+                        <Link to="/allservices" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
                             Explore Courses
                         </Link>
                     </div>
