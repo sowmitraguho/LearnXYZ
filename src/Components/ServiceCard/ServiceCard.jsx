@@ -1,7 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 const ServiceCard = ({ service }) => {
     const { imageUrl, description, price, providerImage, providerName, serviceArea, serviceName } = service;
+    const navigate = useNavigate();
+    const handleViewDetails = (id) => {
+        navigate(`/servicedetails/${id}`);
+    }
     return (
         <div>
             <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm lg:flex-row md:max-w-full hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 ">
@@ -21,7 +26,7 @@ const ServiceCard = ({ service }) => {
                         </div>
                         <div>
                             <h2 className='font-semibold text-violet-800 dark:text-green-400 text-lg mb-1'>Course Fee: ${price}</h2>
-                            <button type="button" class="w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2">View Details</button>
+                            <button onClick={()=> handleViewDetails(service._id)} type="button" class="w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2">View Details</button>
                         </div>
                     </div>
 
