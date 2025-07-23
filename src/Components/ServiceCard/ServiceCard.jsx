@@ -21,7 +21,7 @@ const ServiceCard = ({ service }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col">
+    <div className="flex flex-col h-full bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
       {/* ✅ Course Image */}
       <div className="relative w-full h-48">
         <img
@@ -29,56 +29,67 @@ const ServiceCard = ({ service }) => {
           alt={serviceName}
           className="w-full h-full object-cover"
         />
-        {/* ✅ Rating Badge (optional) */}
-        {rating && (
-          <span className="absolute top-3 right-3 bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-full shadow">
-            ⭐ {rating.toFixed(1)}
-          </span>
-        )}
       </div>
 
       {/* ✅ Card Content */}
       <div className="flex flex-col flex-grow p-4">
-        {/* Title & Area */}
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white line-clamp-2">
-          {serviceName}
-        </h3>
-        <p className="text-purple-600 dark:text-green-400 text-sm font-semibold mt-1">
+        {/* ✅ Title + Rating */}
+        <div>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+            {serviceName}
+          </h3>
+          {/* Rating Badge under title */}
+          {rating && (
+            <span className="inline-block mt-1 bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-full shadow">
+              ⭐ {rating.toFixed(1)}
+            </span>
+          )}
+        </div>
+
+        {/* ✅ Service Area */}
+        <p className="text-purple-600 dark:text-green-400 text-sm font-semibold mt-2">
           {serviceArea}
         </p>
 
-        {/* Description */}
+        {/* ✅ Description (Clamped to 3 lines) */}
         <p className="text-gray-600 dark:text-gray-300 text-sm mt-2 line-clamp-3">
-          {description.split(" ").slice(0, 30).join(" ")}...
+          {description}
         </p>
 
-        {/* ✅ Mentor Info */}
-        <div className="flex items-center gap-3 mt-4">
-          <img
-            src={providerImage}
-            alt={providerName}
-            className="w-10 h-10 rounded-full border"
-          />
-          <div>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Mentored by</p>
-            <p className="font-medium text-gray-800 dark:text-white">
-              {providerName}
-            </p>
+        {/* ✅ Divider before bottom section */}
+        <div className="mt-auto">
+          <div className="border-t border-gray-200 dark:border-gray-700 my-4"></div>
+
+          {/* ✅ Mentor Info */}
+          <div className="flex items-center gap-3 mb-4">
+            <img
+              src={providerImage}
+              alt={providerName}
+              className="w-10 h-10 rounded-full border"
+            />
+            <div>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Mentored by
+              </p>
+              <p className="font-medium text-gray-800 dark:text-white">
+                {providerName}
+              </p>
+            </div>
           </div>
-        </div>
 
-        {/* ✅ Price & Button */}
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-          <span className="text-lg font-bold text-violet-700 dark:text-green-400">
-            ${price}
-          </span>
+          {/* ✅ Price & Button */}
+          <div className="flex items-center justify-between">
+            <span className="text-lg font-bold text-violet-700 dark:text-green-400">
+              ${price}
+            </span>
 
-          <button
-            onClick={() => handleViewDetails(_id)}
-            className="px-4 py-2 text-sm font-semibold text-white rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:from-yellow-400 hover:to-orange-500 transition-all duration-300"
-          >
-            View Details
-          </button>
+            <button
+              onClick={() => handleViewDetails(_id)}
+              className="px-6 py-3 text-white font-semibold rounded-lg bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:from-yellow-400 hover:via-orange-400 hover:to-orange-600 transition-all duration-300"
+            >
+              View Details
+            </button>
+          </div>
         </div>
       </div>
     </div>
