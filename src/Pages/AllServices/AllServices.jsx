@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ServiceCard from '../../Components/ServiceCard/ServiceCard';
 import { Helmet } from 'react-helmet';
+import TypeWriterEffects from '../../Components/TypeWriterEffects/TypeWriterEffects';
 
 const AllServices = () => {
     const [allServices, setAllServices] = useState([]);
@@ -19,6 +20,11 @@ const AllServices = () => {
     }, [])
     return (
         <>
+         {/* 1️⃣ Typewriter Intro Section */}
+        <section className="pt-20">
+          <TypeWriterEffects />
+        </section>
+
         <Helmet>
             <title>All Services</title>
         </Helmet>

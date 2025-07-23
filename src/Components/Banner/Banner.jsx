@@ -1,59 +1,87 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { motion } from "motion/react"
+import React from "react";
+import { Link } from "react-router";
+import { motion } from "motion/react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 
-const Banner = () => {
-    return (
-        <div className='carousel w-full'>
-            <div className="carousel-item w-full relative" id="slide1">
-                <section className="w-full hero min-h-[50vh]" style={{
-                backgroundImage:
-                    "url(https://t3.ftcdn.net/jpg/04/00/77/64/360_F_400776431_5JxdDYRr1mn9yISiUFMPcLtLp3zt6NA1.jpg)",
-            }}> <div className="hero-overlay"></div>
-                <div className="grid max-w-screen-sm md:max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-                    <div className="mr-auto place-self-center lg:col-span-7">
-                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white uppercase">The <motion.span animate={{ color: ["#3C65F5", "#3B25C5", "#ffcc33"], transition: { duration: 8, repeat: Infinity } }} >World's #1 Online</motion.span> Education Platform</h1>
-                        <p className="max-w-2xl mb-6 font-normal text-white lg:mb-8 md:text-lg lg:text-xl "> Learn from Experts. Teach with Passion. Education, Anywhere. Anytime.</p>
+const bannerSlides = [
+  {
+    id: 1,
+    title: "The World's #1 Online Education Platform",
+    subtitle: "Learn from Experts. Teach with Passion. Education, Anywhere. Anytime.",
+    image:
+      "https://t3.ftcdn.net/jpg/04/00/77/64/360_F_400776431_5JxdDYRr1mn9yISiUFMPcLtLp3zt6NA1.jpg",
+  },
+  {
+    id: 2,
+    title: "Skills That Drive You Forward",
+    subtitle:
+      "Technology and the world of work change fast — with us, you’re faster. Get the skills to achieve goals and stay competitive.",
+    image:
+      "https://images.collegexpress.com/blog/how-build-better-relationships-with-teachers.jpg",
+  },
+  {
+    id: 3,
+    title: "Learn Anytime, Anywhere",
+    subtitle:
+      "Flexible learning paths designed for your success. Join millions of learners today!",
+    image:
+      "https://i.ibb.co/x8jgjgTD/side-view-friends-traveling-by-train.jpg",
+  },
+];
 
-                        <Link to="/allservices" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
-                            Explore Courses
-                        </Link>
-                    </div>
-
-                </div>
-            </section>
-            <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <a href="#slide2" className="btn btn-circle">❮</a>
-                <a href="#slide2" className="btn btn-circle">❯</a>
+export default function Banner() {
+  return (
+    <div className="relative w-full">
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        loop={true}
+        className="h-[60vh] md:h-[80vh]"
+      >
+        {bannerSlides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            {/* Background */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
             </div>
-            </div>
-            
-            <div className="carousel-item w-full relative" id="slide2">
-                <section className="w-full hero min-h-[50vh]" style={{
-                backgroundImage:
-                    "url(https://images.collegexpress.com/blog/how-build-better-relationships-with-teachers.jpg)",
-            }}> <div className="hero-overlay"></div>
-                <div className="grid max-w-screen-sm md:max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
-                    <div className="mr-auto place-self-center lg:col-span-7">
-                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white uppercase"><motion.span animate={{ color: ["#3C65F5", "#3B25C5", "#ffcc33"], transition: { duration: 8, repeat: Infinity } }} >Skills </motion.span> that drive you forward</h1>
-                        <p className="max-w-2xl mb-6 font-normal text-white lg:mb-8 md:text-lg lg:text-xl "> Technology and the world of work change fast — with us, you’re faster. Get the skills to achieve goals and stay competitive.</p>
 
-                        <Link to="/allservices" className="inline-flex items-center justify-center px-5 py-3 text-base font-semibold text-center text-white bg-[#3747ff] rounded-lg hover:bg-[#ffcc33] hover:text-gray-950 focus:ring-4 focus:ring-gray-100 ">
-                            Explore Courses
-                        </Link>
-                    </div>
+            {/* Content */}
+            <div className="relative z-10 flex flex-col justify-center items-start max-w-screen-xl mx-auto px-6 h-full">
+              <motion.h1
+                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight max-w-3xl"
+                animate={{
+                  color: ["#ffffff", "#3C65F5", "#ffcc33", "#ffffff"],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                }}
+              >
+                {slide.title}
+              </motion.h1>
 
-                </div>
-            </section>
-             <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <a href="#slide1" className="btn btn-circle">❮</a>
-                <a href="#slide1" className="btn btn-circle">❯</a>
-            </div>
-            </div>
-           
-            
-        </div>
-    );
-};
+              <p className="text-base md:text-lg lg:text-xl text-gray-200 mt-4 max-w-2xl">
+                {slide.subtitle}
+              </p>
 
-export default Banner;
+              <div className="mt-6">
+                <Link
+                  to="/allservices"
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg shadow-md hover:from-yellow-400 hover:to-orange-500 transition-all duration-300"
+                >
+                  Explore Courses
+                </Link>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+}
