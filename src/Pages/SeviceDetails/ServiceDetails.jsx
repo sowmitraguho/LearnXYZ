@@ -1,112 +1,291 @@
-import React, { use, useState } from 'react';
-import { useLoaderData } from 'react-router';
-import { AuthContext } from '../../FirebaseAuth/AuthContext';
-import Swal from 'sweetalert2';
-import { FaDiscord, FaFacebook, FaWhatsapp } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
-import BookingModals from '../../Components/BookingModal/BookingModals';
-import { Helmet } from 'react-helmet';
+import React, { use, useState } from "react";
+import { useLoaderData } from "react-router";
+import { AuthContext } from "../../FirebaseAuth/AuthContext";
+import Swal from "sweetalert2";
+import { FaDiscord, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import BookingModals from "../../Components/BookingModal/BookingModals";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  CartesianGrid,
+} from "recharts";
+
+const enrollmentData = [
+  { month: "Jan", students: 120 },
+  { month: "Feb", students: 180 },
+  { month: "Mar", students: 250 },
+  { month: "Apr", students: 300 },
+  { month: "May", students: 400 },
+  { month: "Jun", students: 550 },
+];
+
+const reviews = [
+  {
+    id: 1,
+    name: "Sophia Turner",
+    comment:
+      "This course transformed my career! The instructor explains everything clearly with real-life examples.",
+    avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "David Lee",
+    comment:
+      "I learned so much and gained practical skills. The community support was amazing too!",
+    avatar: "https://randomuser.me/api/portraits/men/52.jpg",
+    rating: 4,
+  },
+  {
+    id: 3,
+    name: "Emily Davis",
+    comment:
+      "Engaging lessons, well-structured content, and a helpful instructor. Totally worth it!",
+    avatar: "https://randomuser.me/api/portraits/women/32.jpg",
+    rating: 5,
+  },
+];
 
 const ServiceDetails = () => {
-    const { loggedInUser } = use(AuthContext);
-    const serviceData = useLoaderData().data;
-    const [booked, setBooked] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const bookedServiceData = {
-        studentName: loggedInUser.displayName,
-        studentEmail: loggedInUser.email,
-        studentId: loggedInUser.uid,
-        serviceName: serviceData.serviceName,
-        serviceArea: serviceData.serviceArea,
-        serviceId: serviceData._id,
-        serviceImage: serviceData.imageUrl,
-        price: serviceData.price,
-        providerName: serviceData.providerName,
-        providerEmail: serviceData.providerEmail,
-    }
+  const { loggedInUser } = use(AuthContext);
+  const serviceData = useLoaderData().data;
 
-    const handleOpenModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
+  const [booked, setBooked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-    const handleEnrollment = async () => {
-        console.log('Enrolled by', loggedInUser);
+  const bookedServiceData = {
+    studentName: loggedInUser.displayName,
+    studentEmail: loggedInUser.email,
+    studentId: loggedInUser.uid,
+    serviceName: serviceData.serviceName,
+    serviceArea: serviceData.serviceArea,
+    serviceId: serviceData._id,
+    serviceImage: serviceData.imageUrl,
+    price: serviceData.price,
+    providerName: serviceData.providerName,
+    providerEmail: serviceData.providerEmail,
+  };
 
-        console.log(bookedServiceData);
-        handleOpenModal();
-        setBooked(true);
-        
-    }
-    return (
-        <div className='p-8 lg:p-24'>
-            <Helmet>
-                <title>Course Details</title>
-            </Helmet>
-            <section className='flex flex-col-reverse lg:flex-row gap-6 items-center justify-between shadow-xl border border-gray-200 dark:border-gray-900 p-4 md:p-12  bg-white dark:bg-gray-900'>
-                <div className="left-section w-full max-w-full">
-                    <h1 className="text-3xl md:text-4xl font-bold dark:text-white">{serviceData.serviceName}</h1>
-                    <h2 className="text-2xl my-2 flex items-center gap-2">Course Fee: <span className='text-blue-600 font-extrabold text-4xl'>${serviceData.price}</span> </h2>
-                    <p className="text-xl mb-2">Course Category: <span className='font-semibold'>{serviceData.serviceType? serviceData.serviceType : serviceData.serviceArea}</span> </p>
-                    <p className="text-xl mb-2">Course Duration: <span className='text-purple-600 font-semibold'>{serviceData.courseDuration ? serviceData.courseDuration : '110 Hours'}</span></p>
-                    <p className='mb-2 text-lg font-semibold' >Ratings: <span className='text-green-600 dark:text-yellow-200'>{serviceData.rating ? serviceData.rating : '4.5'}</span> </p>
-                    <button onClick={handleEnrollment} disabled={booked} type="button" className='w-50 text-white font-bold bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 rounded-lg px-5 py-2.5 text-center me-2 mb-2 disabled:cursor-not-allowed'>Enroll Now</button>
-                </div>
-                <div className="right-section w-full">
-                    <img className='rounded-lg max-w-full ' src={serviceData.imageUrl} alt="" />
-                </div>
-            </section>
-            <section>
-                {showModal && <BookingModals serviceData={bookedServiceData} handleCloseModal={handleCloseModal} />}
-            </section>
-            <section className='my-6 bg-white p-4 md:p-8  text-xl shadow-xl border border-gray-200 dark:border-gray-900 dark:bg-gray-900'>
-                <h2 className="text-3xl font-bold">Course Details</h2>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6'>
-                    <div>
-                        <p className="text-xl my-2">Course Instructor: <span className='text-green-400 font-semibold'>{serviceData.providerName}</span></p>
-                        <h2 className="text-xl my-2 flex items-center gap-2">Course Fee: <span className='text-blue-600 font-bold text-2xl'>${serviceData.price}</span> </h2>
-                        <p className="text-xl mb-2">Course Category: <span className='font-semibold'>{serviceData.serviceArea}</span> </p>
-                        <p className="text-xl mb-2">Course Duration: <span className=' font-semibold'>{serviceData.courseDuration ? serviceData.courseDuration : '110 Hours'}</span></p>
-                    </div>
-                    <div>
-                        <p className="text-xl mb-2">Course Expire: <span className=' font-semibold'>{serviceData.courseExpire ? serviceData.courseExpire : '12/12/2026'}</span></p>
-                        <p className="text-xl mb-2">Students: <span className=' font-semibold'>2000+</span></p>
-                        <p className="text-xl mb-2">Language: <span className=' font-semibold'>English</span></p>
-                    </div>
-                </div>
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
+  const handleEnrollment = () => {
+    Swal.fire({
+      title: "Enrollment Successful!",
+      text: `You have enrolled in ${serviceData.serviceName}`,
+      icon: "success",
+      timer: 2000,
+    });
+    handleOpenModal();
+    setBooked(true);
+  };
 
+  return (
+    <div className="py-24 bg-gradient-to-b from-indigo-50 to-white dark:from-gray-900 dark:to-gray-950 min-h-screen">
+      <Helmet>
+        <title>{serviceData.serviceName} | LearnX</title>
+      </Helmet>
 
-            </section>
-            <section className='my-6 bg-white p-2 md:p-8  shadow-xl border border-gray-200 dark:border-gray-900 dark:bg-gray-900'>
-                <h2 className="text-3xl font-bold my-4">Course Description</h2>
-                <p className="text-xl text-gray-800 px-2 md:px-8 text-justify dark:text-white">{serviceData.description}</p>
-            </section>
-            <section className='flex flex-col md:flex-row items-center justify-around shadow-xl border border-gray-200 dark:border-gray-900 px-4 md:px-12  bg-white dark:bg-gray-900 mb-6 min-h-30'>
-                <div className="service-provider mt-4 md:mt-0 w-full p-2 rounded-md">
-                    <h4 className='font-semibold mb-1'>Mentored by:</h4>
-                    <div className="profile flex items-center gap-2">
-                        <img className='rounded-full w-10 h-10' src={serviceData.providerImage} alt="" />
-                        <p className='font-semibold'>{serviceData.providerName}</p>
-                    </div>
-                </div>
-                <div className="flex items-center mt-2 mb-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
-                    <p className="text-lg font-semibold dark:text-green-500">Contact:</p>
-                    <a href="#" class=" dark:hover:text-white">
-                        <FaFacebook />
-                    </a>
-                    <a href="#" class=" dark:hover:text-white">
-                        <FaDiscord />
-                    </a>
-                    <a href="#" class="dark:hover:text-white">
-                        <FaXTwitter />
-                    </a>
-                    <a href="#" class="dark:hover:text-white">
-                        <FaWhatsapp />
-                    </a>
+      {/* ✅ HERO SECTION */}
+      <div className="relative w-full h-[280px] sm:h-[350px] md:h-[400px] flex items-center justify-center overflow-hidden">
+        <img
+          src={serviceData.imageUrl}
+          alt={serviceData.serviceName}
+          className="absolute inset-0 w-full h-full object-cover brightness-50"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative text-center text-white px-4"
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-lg leading-snug">
+            {serviceData.serviceName}
+          </h1>
+          <p className="mt-3 text-base sm:text-lg opacity-90">
+            Master {serviceData.serviceArea} with this comprehensive course.
+          </p>
+        </motion.div>
+      </div>
 
-                </div>
-            </section>
+      {showModal && (
+        <BookingModals
+          serviceData={bookedServiceData}
+          handleCloseModal={handleCloseModal}
+        />
+      )}
+
+      {/* ✅ COURSE HIGHLIGHTS CARD */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-6xl mx-auto -mt-14 sm:-mt-20 md:-mt-24 bg-white dark:bg-gray-900 rounded-3xl shadow-xl p-6 sm:p-8 md:p-10 text-center"
+      >
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-20">
+          <div>
+            <p className="text-gray-500 dark:text-gray-300 text-sm sm:text-base">
+              Duration
+            </p>
+            <h3 className="text-lg sm:text-xl font-bold">
+              {serviceData.courseDuration || "110 Hours"}
+            </h3>
+          </div>
+          <div>
+            <p className="text-gray-500 dark:text-gray-300 text-sm sm:text-base">
+              Students
+            </p>
+            <h3 className="text-lg sm:text-xl font-bold">2000+</h3>
+          </div>
+          <div>
+            <p className="text-gray-500 dark:text-gray-300 text-sm sm:text-base">
+              Language
+            </p>
+            <h3 className="text-lg sm:text-xl font-bold">English</h3>
+          </div>
+          <div>
+            <p className="text-gray-500 dark:text-gray-300 text-sm sm:text-base">
+              Rating
+            </p>
+            <h3 className="text-lg sm:text-xl font-bold text-yellow-500">
+              ⭐ {serviceData.rating || "4.5"}
+            </h3>
+          </div>
         </div>
-    );
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          onClick={handleEnrollment}
+          disabled={booked}
+          className="mt-6 px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-bold text-base sm:text-lg text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-lg hover:shadow-xl disabled:opacity-50"
+        >
+          {booked ? "✅ Enrolled" : `Enroll Now - $${serviceData.price}`}
+        </motion.button>
+      </motion.div>
+
+      {/* ✅ COURSE DETAILS & INSTRUCTOR */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="card max-w-6xl mx-auto mt-10 sm:mt-12 dark:bg-gray-900 rounded-3xl shadow-sm p-5 sm:p-8 md:p-10 bg-gray-200"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-indigo-700 dark:text-indigo-300 mb-4 text-center">
+          About this Course
+        </h2>
+        <p className="text-gray-700 dark:text-gray-300 text-base sm:text-lg text-center leading-relaxed">
+          {serviceData.description}
+        </p>
+
+        {/* Instructor Section */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          {/* Instructor */}
+          <div className="flex items-center justify-center sm:justify-start gap-4">
+            <img
+              src={serviceData.providerImage}
+              alt={serviceData.providerName}
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 border-purple-400"
+            />
+            <div>
+              <p className="text-gray-500 dark:text-gray-400 text-sm">
+                Instructor
+              </p>
+              <h3 className="text-lg sm:text-xl font-bold text-indigo-700 dark:text-indigo-300">
+                {serviceData.providerName}
+              </h3>
+            </div>
+          </div>
+          {/* Social Links */}
+          <div className="flex justify-center gap-4 text-xl sm:text-2xl text-purple-600 dark:text-purple-300">
+            <FaFacebook className="hover:text-blue-600 cursor-pointer" />
+            <FaDiscord className="hover:text-indigo-600 cursor-pointer" />
+            <FaXTwitter className="hover:text-black cursor-pointer" />
+            <FaWhatsapp className="hover:text-green-600 cursor-pointer" />
+          </div>
+        </div>
+      </motion.div>
+
+      {/* ✅ ENROLLMENT TREND GRAPH */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-6xl mx-auto mt-10 sm:mt-12 bg-blue-100 dark:bg-gray-900 rounded-3xl shadow-xl p-5 sm:p-8 md:p-10"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-green-700 dark:text-green-300 mb-4">
+          Enrollment Growth
+        </h2>
+        <div className="w-full h-[250px] sm:h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart data={enrollmentData}>
+              <defs>
+                <linearGradient id="colorStudents" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <XAxis dataKey="month" stroke="#6B46C1" />
+              <YAxis stroke="#6B46C1" />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="students"
+                stroke="#7F56D9"
+                fillOpacity={1}
+                fill="url(#colorStudents)"
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </motion.div>
+
+      {/* ✅ STUDENT REVIEWS */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-6xl mx-auto mt-10 sm:mt-12 pb-14 sm:mb-20 bg-gradient-to-r from-pink-200 via-purple-200 to-blue-200 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-3xl shadow-xl p-5 sm:p-8 md:p-10"
+      >
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-pink-700 dark:text-pink-300 mb-6">
+          What Students Say
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+          {reviews.map((r) => (
+            <div
+              key={r.id}
+              className="bg-white dark:bg-gray-900 p-5 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <img
+                  src={r.avatar}
+                  alt={r.name}
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-purple-300"
+                />
+                <div>
+                  <h4 className="font-semibold text-base sm:text-lg text-purple-700 dark:text-purple-300">
+                    {r.name}
+                  </h4>
+                  <p className="text-yellow-500 text-sm">
+                    {"⭐".repeat(r.rating)}
+                  </p>
+                </div>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">
+                {r.comment}
+              </p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
 };
 
 export default ServiceDetails;

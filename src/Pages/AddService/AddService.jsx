@@ -1,99 +1,167 @@
-import React, { use } from 'react';
-import { AuthContext } from '../../FirebaseAuth/AuthContext';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { Helmet } from 'react-helmet';
+import React, { use } from "react";
+import { AuthContext } from "../../FirebaseAuth/AuthContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const AddService = () => {
-    const { loggedInUser } = use(AuthContext);
+  const { loggedInUser } = use(AuthContext);
 
-    const handleAddService = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const data = new FormData(form);
-        const serviceData = Object.fromEntries(data.entries());
-        serviceData.providerImage = loggedInUser.photoURL;
-        console.log('form submitted', serviceData);
-        axios.post('https://learnxyz-server.onrender.com/services', serviceData)
-            .then(res => {
-                console.log('after adding in mogodb', res);
-                Swal.fire({
-                    title: "Service Published Sucessfully!",
-                    icon: "success",
-                    timer: 2000,
-                    draggable: true
-                });
-                form.reset();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+  const handleAddService = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const serviceData = Object.fromEntries(data.entries());
+    serviceData.providerImage = loggedInUser.photoURL;
 
+    axios
+      .post("https://learnxyz-server.onrender.com/services", serviceData)
+      .then((res) => {
+        Swal.fire({
+          title: "✅ Service Published Successfully!",
+          text: "Your course is now live!",
+          icon: "success",
+          timer: 2000,
+        });
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          title: "❌ Error!",
+          text: "Something went wrong. Try again later.",
+          icon: "error",
+        });
+      });
+  };
 
-    return (
-        <>
-        <Helmet>
-            <title>Add Service</title>
-        </Helmet>
-        <div className='mx-4 my-4 lg:mx-20 md:my-10 border border-gray-300 shadow-md p-4 lg:p-10 rounded-2xl'>
-            <h1 className="text-4xl font-bold my-4 text-blue-500 text-center pb-4">Add A New Service</h1>
-            <form onSubmit={handleAddService}>
-                <div className="grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service name</label>
-                        <input name='serviceName' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service Name" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Area</label>
-                        <input name='serviceArea' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service Area" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Type</label>
-                        <input name='serviceType' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service Type" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Language</label>
-                        <input name='serviceLanguage' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service Language" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Image URL</label>
-                        <input name='imageUrl' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Service Image URL" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Course Duration</label>
-                        <input name='courseDuration' type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="0 hour" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                        <input name='price' type="number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="$000" required />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provider Name</label>
-                        <input name='providerName' type="text" id="website" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={loggedInUser?.displayName} readOnly />
-                    </div>
-                    <div>
-                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provider Email</label>
-                        <input type="email" name='providerEmail' className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value={loggedInUser?.email} readOnly />
-                    </div>
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                    <textarea name='description' id="description" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Details about Service" required />
-                </div>
+  return (
+    <>
+      <Helmet>
+        <title>Add Service | LearnX</title>
+      </Helmet>
 
-                <div className="flex items-start mb-6">
-                    <div className="flex items-center h-5">
-                        <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
-                    </div>
-                    <label htmlFor="remember" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
-                </div>
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-md font-semibold w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>
+      {/* ✅ Gradient Background */}
+      <div className="py-24 min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-blue-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
+        {/* ✅ Card Wrapper */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-5xl bg-white dark:bg-gray-900 rounded-3xl shadow-2xl p-6 sm:p-10"
+        >
+          {/* ✅ Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+              🚀 Add a New Course
+            </h1>
+            <p className="mt-2 text-gray-600 dark:text-gray-300">
+              Fill out the details below to publish your course
+            </p>
+          </div>
 
-        </div>
-        </>
-    );
+          {/* ✅ Form */}
+          <form onSubmit={handleAddService} className="space-y-6">
+            {/* ✅ Input Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField label="Service Name" name="serviceName" placeholder="e.g. Advanced React" required />
+              <FormField label="Service Area" name="serviceArea" placeholder="e.g. Web Development" required />
+              <FormField label="Service Type" name="serviceType" placeholder="e.g. Online Bootcamp" required />
+              <FormField label="Service Language" name="serviceLanguage" placeholder="e.g. English" required />
+              <FormField label="Service Image URL" name="imageUrl" placeholder="https://example.com/image.jpg" required />
+              <FormField label="Course Duration" name="courseDuration" placeholder="e.g. 40 hours" required />
+              <FormField label="Price" name="price" type="number" placeholder="e.g. 299" required />
+
+              {/* Provider Name & Email (Readonly) */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Provider Name
+                </label>
+                <input
+                  name="providerName"
+                  type="text"
+                  value={loggedInUser?.displayName || ""}
+                  readOnly
+                  className="mt-2 w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-purple-400 outline-none"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Provider Email
+                </label>
+                <input
+                  name="providerEmail"
+                  type="email"
+                  value={loggedInUser?.email || ""}
+                  readOnly
+                  className="mt-2 w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-purple-400 outline-none"
+                />
+              </div>
+            </div>
+
+            {/* ✅ Description */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Course Description
+              </label>
+              <textarea
+                name="description"
+                rows="4"
+                placeholder="Write a brief description about the course..."
+                required
+                className="mt-2 w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-pink-400 outline-none"
+              ></textarea>
+            </div>
+
+            {/* ✅ Terms Checkbox */}
+            <div className="flex items-start gap-3">
+              <input
+                id="terms"
+                type="checkbox"
+                className="w-5 h-5 rounded-md text-purple-500 focus:ring-purple-300 dark:bg-gray-800"
+                required
+              />
+              <label
+                htmlFor="terms"
+                className="text-sm text-gray-700 dark:text-gray-300"
+              >
+                I agree with the{" "}
+                <a href="#" className="text-purple-600 hover:underline">
+                  terms and conditions
+                </a>
+              </label>
+            </div>
+
+            {/* ✅ Submit Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              type="submit"
+              className="w-full py-3 rounded-xl text-lg font-bold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-lg hover:shadow-xl transition-all"
+            >
+              ✅ Publish Course
+            </motion.button>
+          </form>
+        </motion.div>
+      </div>
+    </>
+  );
 };
+
+/* ✅ Reusable Input Field Component */
+const FormField = ({ label, name, type = "text", placeholder, required }) => (
+  <div>
+    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      {label}
+    </label>
+    <input
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      required={required}
+      className="mt-2 w-full px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-purple-400 outline-none"
+    />
+  </div>
+);
 
 export default AddService;
