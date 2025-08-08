@@ -124,8 +124,4 @@ Profile → Manage account settings
 Contributions are welcome! Feel free to fork the repo, create a branch, and submit pull requests for improvements or new features.
 
 ## 📝 License
-This project is open source and free to use under the MIT License.
-
-yaml
-Copy
-Edit
+This project is for educational purposes. You may use and modify it freely.
