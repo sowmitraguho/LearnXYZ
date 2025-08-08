@@ -48,9 +48,9 @@ learnxyz/
 │ ├── Layouts/
 │ ├── pages/
 │ ├── Router/
-└── main.jsx
-└── app.jsx
-└── ....
+├── main.jsx
+├── app.jsx
+├── ....
 └── README.md
 
 ---
