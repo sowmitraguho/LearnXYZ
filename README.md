@@ -57,13 +57,13 @@ learnxyz/
 
 ## 🛠️ Installation & Setup
 
-### 1️⃣ Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/sowmitraguho/learnxyz.git
 cd learnxyz
 
-## 🌟 Pages Overview
+**## 🌟 Pages Overview**
 Home → Explore courses and latest updates
 
 Course Detail → View lessons and quizzes
@@ -72,10 +72,10 @@ Dashboard → Track progress and scores
 
 Profile → Manage account settings
 
-## 🤝 Contributing
+**## 🤝 Contributing**
 Contributions are welcome! Feel free to fork the repo, create a branch, and submit pull requests for improvements or new features.
 
-## 📝 License
+**## 📝 License**
 This project is open source and free to use under the MIT License.
 
 yaml
