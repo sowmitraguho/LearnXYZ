@@ -2,7 +2,7 @@
 
 LearnXYZ is an interactive learning platform designed to help users master topics in math, science, and technology through structured lessons, quizzes, and real-time progress tracking. It offers an engaging, user-friendly experience for learners of all levels.
 
-This project is built with React + Next.js on the frontend and Node.js + Express + MongoDB on the backend.
+This project is built with React on the frontend and Node.js + Express + MongoDB on the backend.
 
 ---
 
@@ -63,7 +63,7 @@ learnxyz/
 git clone https://github.com/sowmitraguho/learnxyz.git
 cd learnxyz
 
-🌟 Pages Overview
+## 🌟 Pages Overview
 Home → Explore courses and latest updates
 
 Course Detail → View lessons and quizzes
@@ -72,10 +72,10 @@ Dashboard → Track progress and scores
 
 Profile → Manage account settings
 
-🤝 Contributing
+## 🤝 Contributing
 Contributions are welcome! Feel free to fork the repo, create a branch, and submit pull requests for improvements or new features.
 
-📝 License
+## 📝 License
 This project is open source and free to use under the MIT License.
 
 yaml
