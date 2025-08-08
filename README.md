@@ -1,39 +1,83 @@
-# 📚 LearnXYZ — Interactive Learning Platform
+# 📚 LearnXYZ
 
-## 📊 GitHub Stats
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=sowmitraguho&show_icons=true&theme=tokyonight" alt="GitHub Stats" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=sowmitraguho&layout=compact&theme=tokyonight" alt="Top Languages" height="165" />
-</p>
+LearnXYZ is an interactive learning platform designed to help users master topics in math, science, and technology through structured lessons, quizzes, and real-time progress tracking. It offers an engaging, user-friendly experience for learners of all levels.
+
+This project is built with React + Next.js on the frontend and Node.js + Express + MongoDB on the backend.
 
 ---
 
-## 📖 About LearnXYZ
-**LearnXYZ** is an interactive, user-friendly platform designed to help learners master topics in **math, science, and technology**.  
-The platform offers structured lessons, engaging quizzes, and real-time progress tracking to ensure an effective learning journey.  
-It’s built with a modern tech stack to provide **speed, scalability, and a smooth user experience**.
+## ✨ Features
+
+✅ Structured Lessons  
+* Topic-wise courses for focused learning  
+* Step-by-step content with examples and exercises
+
+✅ Interactive Quizzes  
+* Multiple-choice questions to test understanding  
+* Immediate feedback and explanations  
+
+✅ Progress Tracking  
+* Track completed lessons and quiz scores  
+* Visual dashboard showing learning progress  
+
+✅ Responsive & Accessible UI  
+* Mobile-friendly design  
+* Easy navigation with search and filter options  
+
+✅ User Authentication  
+* Email/password signup and login  
+* Social login (Google) support  
+
+✅ Tech Stack  
+
+* Frontend: React, Next.js, Tailwind CSS, TanStack Query  
+* Backend: Node.js, Express.js, MongoDB, JWT  
+* Authentication: Firebase Authentication  
+* Deployment-ready with scalable architecture  
 
 ---
 
-## 🚀 Features
-- 📚 **Structured Lessons** — Topic-wise learning paths for better focus
-- 📝 **Interactive Quizzes** — Practice and test your knowledge
-- 📊 **Progress Tracking** — Monitor learning history and improvement
-- 🔍 **Search & Filter** — Quickly find topics you want to learn
-- 📱 **Responsive UI** — Works seamlessly on all devices
+## 🚀 Project Structure
+
+learnxyz/
+├── src/ # React frontend
+│ ├── assets/
+│ ├── components/
+│ ├── contexts/
+│ ├── firebaseAuth/
+│ ├── Layouts/
+│ ├── pages/
+│ ├── Router/
+└── main.jsx
+└── app.jsx
+└── ....
+└── README.md
 
 ---
 
-## 🛠️ Tech Stack
-<p>
-  <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,nodejs,express,mongodb" alt="Tech Stack" />
-</p>
+## 🛠️ Installation & Setup
 
----
+### 1️⃣ Clone the repository
 
-## 📦 Installation
+```bash
+git clone https://github.com/sowmitraguho/learnxyz.git
+cd learnxyz
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/sowmitraguho/learnxyz.git
-   cd learnxyz
+🌟 Pages Overview
+Home → Explore courses and latest updates
+
+Course Detail → View lessons and quizzes
+
+Dashboard → Track progress and scores
+
+Profile → Manage account settings
+
+🤝 Contributing
+Contributions are welcome! Feel free to fork the repo, create a branch, and submit pull requests for improvements or new features.
+
+📝 License
+This project is open source and free to use under the MIT License.
+
+yaml
+Copy
+Edit
