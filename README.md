@@ -38,7 +38,7 @@ This project is built with React on the frontend and Node.js + Express + MongoDB
 ---
 
 ## 🚀 Project Structure
-
+```
 learnxyz/
 ├── src/ # React frontend
 │ ├── assets/
@@ -52,6 +52,62 @@ learnxyz/
 ├── app.jsx
 ├── ....
 └── README.md
+```
+---
+
+## 🛠️ Installation & Setup
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/employee-management-system.git
+cd employee-management-system
+```
+
+### 2️⃣ Setup the Backend
+
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside server/
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Start the backend:
+
+```bash
+npm run dev
+```
+
+---
+
+### 3️⃣ Setup the Frontend
+
+```bash
+cd ../client
+npm install
+```
+
+Create a `.env` file inside client/
+
+```env
+VITE_API_URL=http://localhost:5000
+VITE_IMGBB_API_KEY=your_imgbb_api_key
+VITE_FIREBASE_API_KEY=your_firebase_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+```
+
+Run the frontend:
+
+```bash
+npm run dev
+```
 
 ---
 
