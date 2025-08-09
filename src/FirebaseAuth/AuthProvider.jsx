@@ -8,19 +8,30 @@ import axios from 'axios';
 const AuthProvider = ({children}) => {
 
     const provider = new GoogleAuthProvider();
-
+    
     const [loading, setLoading] = useState(true);
-
     const [loggedInUser, setLoggedInUser] = useState(auth.currentUser);
 
+    //add  user to  database
     const addUser = (userData) => {
         setLoading(true);
-        // Add user to your database
         axios.post('https://learnxyz-server.onrender.com/user', userData)
             .then(res => {
                 console.log('after adding in mogodb', res);
             })
             .catch(function (error) {
+                console.log(error);
+            });
+    }
+    //get user from database
+    const getUser = (email) => {
+        setLoading(true);
+        return axios.get(`https://learnxyz-server.onrender.com/user/${email}`)
+            .then(res => {
+                console.log('User fetched from database', res.data);
+                return res.data;
+            })
+            .catch(error => {
                 console.log(error);
             });
     }
@@ -58,7 +69,15 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
         const UnSubscribe = onAuthStateChanged(auth, currentUser => {
             console.log('inside useeffect after auth state changed', currentUser);
-            setLoggedInUser(currentUser);
+            setLoading(true);
+            if (currentUser) {
+                getUser(currentUser.email)
+                    .then(userData => {
+                        setLoggedInUser(userData[0]);
+                    });
+            } else {
+                setLoggedInUser(null);
+            }
             setLoading(false);
         });
         return ()=> {

@@ -13,7 +13,7 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
-    
+
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
@@ -59,17 +59,22 @@ const Navbar = () => {
             >
                 Courses
             </NavLink>
-            <NavLink
-                to="/register"
-                className={({ isActive }) =>
-                    `px-4 py-2 rounded-md transition hover:text-purple-500 ${isActive ? "text-purple-600 font-semibold" : "text-gray-700 dark:text-gray-200"
-                    }`
-                }
-            >
-                Register
-            </NavLink>
+            {/* Show Register only when not logged in */}
+            {!loggedInUser && (
+                <NavLink
+                    to="/register"
+                    className={({ isActive }) =>
+                        `px-4 py-2 rounded-md transition hover:text-purple-500 ${isActive
+                            ? "text-purple-600 font-semibold"
+                            : "text-gray-700 dark:text-gray-200"
+                        }`
+                    }
+                >
+                    Register
+                </NavLink>
+            )}
 
-            {loggedInUser && (
+            {/* {loggedInUser && (
                 <div className="relative group">
                     <span className="px-4 py-2 cursor-pointer text-gray-700 dark:text-gray-200 hover:text-purple-500">
                         Dashboard ▾
@@ -91,6 +96,34 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
+            )} */}
+            {/* Role-based links */}
+            {loggedInUser?.role === "Instructor" && (
+                <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                        `px-4 py-2 rounded-md transition hover:text-purple-500 ${isActive
+                            ? "text-purple-600 font-semibold"
+                            : "text-gray-700 dark:text-gray-200"
+                        }`
+                    }
+                >
+                    Dashboard
+                </NavLink>
+            )}
+
+            {loggedInUser?.role === "Student" && (
+                <NavLink
+                    to="/bookedservices"
+                    className={({ isActive }) =>
+                        `px-4 py-2 rounded-md transition hover:text-purple-500 ${isActive
+                            ? "text-purple-600 font-semibold"
+                            : "text-gray-700 dark:text-gray-200"
+                        }`
+                    }
+                >
+                    Booked Service
+                </NavLink>
             )}
         </>
     );
@@ -122,7 +155,7 @@ const Navbar = () => {
                     <Tooltip id="user-tooltip" />
 
                     {/* Login/Logout */}
-                    {loggedInUser?.uid ? (
+                    {loggedInUser?._id ? (
                         <button
                             onClick={handleLogOut}
                             className="hidden md:inline px-4 py-2 rounded-md bg-purple-600 text-white hover:bg-purple-700 transition"
@@ -140,11 +173,11 @@ const Navbar = () => {
 
                     {/* Theme Toggle */}
 
-                    <ThemeToggle theme={theme} setTheme={setTheme}/>
+                    <ThemeToggle theme={theme} setTheme={setTheme} />
 
 
                     {/* Theme Toggle */}
-                  
+
 
 
                     {/* Mobile Menu Toggle */}
