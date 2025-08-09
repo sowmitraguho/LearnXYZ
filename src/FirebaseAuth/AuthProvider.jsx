@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from '../../firebase.init';
+import axios from 'axios';
 
 
 const AuthProvider = ({children}) => {
@@ -12,12 +13,29 @@ const AuthProvider = ({children}) => {
 
     const [loggedInUser, setLoggedInUser] = useState(auth.currentUser);
 
+    const addUser = (userData) => {
+        setLoading(true);
+        // Add user to your database
+        axios.post('https://learnxyz-server.onrender.com/user', userData)
+            .then(res => {
+                console.log('after adding in mogodb', res);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
-    const updateUser = (updatedUserData) => {
+    const updateUser = (UserData) => {
+        const updatedUserData = {
+            displayName: UserData.displayName,
+            photoURL: UserData.photoURL
+        };
         console.log('inside update user', updatedUserData);
+        addUser(UserData);
         setLoading(true);
         return updateProfile(auth.currentUser, updatedUserData);
     }

@@ -12,7 +12,7 @@ const Register = () => {
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(false);
-  const imgbbAPIKey = import.meta.env.VITE_imgbbApiKey; 
+  const imgbbAPIKey = import.meta.env.VITE_imgbbApiKey;
 
   const handleGoogleSignIn = () => {
     googleSignIn()
@@ -30,6 +30,7 @@ const Register = () => {
 
     const form = e.target;
     const name = form.name.value;
+    const role = form.role.value;
     const email = form.email.value;
     const password = form.password.value;
     const imageFile = form.photoFile.files[0]; // file input
@@ -67,7 +68,8 @@ const Register = () => {
         });
 
         // Update user profile
-        await updateUser({ displayName: name, photoURL });
+        await updateUser({ displayName: name, photoURL, role });
+        console.log("User profile updated:", { displayName: name, photoURL, role });
       }
 
       navigate("/");
@@ -139,6 +141,25 @@ const Register = () => {
                   className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 dark:text-white"
                 />
               </div>
+              {/* Role */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  You are a
+                </label>
+                <select
+                  name="role"
+                  required
+                  className="mt-1 w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 
+               bg-gray-50 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-purple-400 focus:outline-none"
+                >
+                  <option value="" disabled selected>
+                    Select your role
+                  </option>
+                  <option value="Student">Student</option>
+                  <option value="Instructor">Instructor</option>
+                </select>
+              </div>
+
 
               {/* Profile Photo Upload */}
               <div>
