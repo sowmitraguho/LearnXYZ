@@ -13,10 +13,7 @@ const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
-    // Theme toggle
-    // const handleToggle = (e) => {
-    //     setTheme(e.target.checked ? "dark" : "light");
-    // };
+    
 
     useEffect(() => {
         localStorage.setItem("theme", theme);
@@ -60,7 +57,16 @@ const Navbar = () => {
                     }`
                 }
             >
-                Services
+                Courses
+            </NavLink>
+            <NavLink
+                to="/register"
+                className={({ isActive }) =>
+                    `px-4 py-2 rounded-md transition hover:text-purple-500 ${isActive ? "text-purple-600 font-semibold" : "text-gray-700 dark:text-gray-200"
+                    }`
+                }
+            >
+                Register
             </NavLink>
 
             {loggedInUser && (

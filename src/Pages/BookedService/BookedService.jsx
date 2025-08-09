@@ -155,7 +155,7 @@ const BookedService = () => {
                     🚀 Keep Learning, Keep Growing!
                 </h2>
                 <p className="mt-3 text-gray-700 dark:text-gray-300">
-                    Completing your courses unlocks more opportunities. Don’t stop now!
+                    Completing your courses unlocks more opportunities. Don't stop now!
                 </p>
                 <Link
                     to="/allservices"
