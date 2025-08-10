@@ -12,6 +12,8 @@ import {
     Legend,
 } from "chart.js";
 import { useRef } from "react";
+import { FaBook, FaUserGraduate, FaStar, FaDollarSign } from "react-icons/fa";
+
 
 
 
@@ -116,6 +118,12 @@ const DashboardHome = () => {
         }
     };
 
+    const stats = [
+  { title: "Courses", value: coursesCount ?? 0, bgColor: "bg-purple-600", icon: <FaBook size={36} /> },
+  { title: "Students", value: studentsCount ?? 0, bgColor: "bg-pink-600", icon: <FaUserGraduate size={36} /> },
+  { title: "Reviews", value: reviewsCount ?? 0, bgColor: "bg-yellow-400", icon: <FaStar size={36} /> },
+  { title: "Earnings", value: `$${earnings?.toLocaleString() ?? 0}`, bgColor: "bg-green-600", icon: <FaDollarSign size={36} /> },
+];
 
 
     // Chart Data example (adjust according to your API data)
@@ -156,7 +164,7 @@ const DashboardHome = () => {
                     <p><strong>Education:</strong> {education ? education : "No education information provided"}</p>
                     <p><strong>Current Position:</strong> {currentPosition ? currentPosition : "No current position provided"}</p>
                     <p>
-                        
+
                         <strong>Experiences:</strong>{" "}
                         {experiences ? experiences : "No experiences provided"}
                     </p>
@@ -175,16 +183,17 @@ const DashboardHome = () => {
                             {instagram}
                         </a>
                     </p>
-                </div>
-
-                <div>
                     {/* Edit button */}
                     <button
                         onClick={openDialog}
-                        className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold hover:from-yellow-400 hover:to-orange-500 transition-all duration-300"
+                        className="mt-2 px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold hover:from-yellow-400 hover:to-orange-500 transition-all duration-300"
                     >
                         Edit Profile
                     </button>
+                </div>
+
+                <div>
+
 
                     <dialog
                         ref={modalRef}
@@ -309,18 +318,39 @@ const DashboardHome = () => {
 
 
             </section>
+            <section>
+           
 
-            {/* Charts */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl font-semibold mb-4">Activity Overview</h2>
-                    <Bar data={barData} />
-                </div>
-                <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-                    <h2 className="text-xl font-semibold mb-4">Earnings Distribution</h2>
-                    <Pie data={pieData} />
-                </div>
-            </section>
+                    <div className="max-w-5xl mx-auto my-6">
+                        <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0 justify-between">
+                            {stats.map(({ title, value, bgColor, icon }) => (
+                                <div
+                                    key={title}
+                                    className={`${bgColor} text-white rounded-xl shadow-lg flex items-center p-6 flex-1 min-w-[140px]`}
+                                >
+                                    <div className="text-4xl mr-4">{icon}</div>
+                                    <div>
+                                        <p className="text-lg font-semibold">{title}</p>
+                                        <p className="text-3xl font-bold">{value}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                </section>
+
+                {/* Charts */}
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold mb-4">Activity Overview</h2>
+                        <Bar data={barData} />
+                    </div>
+                    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
+                        <h2 className="text-xl font-semibold mb-4">Earnings Distribution</h2>
+                        <Pie data={pieData} />
+                    </div>
+                </section>
         </div>
     );
 };

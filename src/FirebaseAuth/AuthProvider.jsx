@@ -95,6 +95,7 @@ const AuthProvider = ({children}) => {
         logOut,
         setLoggedInUser,
         setLoading,
+        getUser,
         loggedInUser,
         loading
     }
