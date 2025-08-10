@@ -4,16 +4,23 @@ import MyServiceCard from "../../Components/MyServiceCard/MyServiceCard";
 import { AuthContext } from "../../FirebaseAuth/AuthContext";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
+import { FaBook, FaUserGraduate, FaStar, FaLightbulb } from "react-icons/fa";
+
 
 const ManageServices = () => {
     const { loggedInUser, loading } = use(AuthContext);
     const [allServices, setAllServices] = useState([]);
     const [fetching, setFetching] = useState(true);
+    const [stats, setStats] = useState({
+        totalStudents: 0,
+        averageRating: 0,
+    });
+
 
     useEffect(() => {
         if (!loggedInUser?.email) return;
         axios
-            .get(`https://learnxyz-server.onrender.com/myservices/${loggedInUser.email}`)
+            .get(`${import.meta.env.VITE_SERVER_URL}myservices/${loggedInUser.email}`)
             .then((result) => {
                 setAllServices(result.data);
                 setFetching(false);
@@ -21,6 +28,13 @@ const ManageServices = () => {
             .catch((error) => {
                 console.log(error);
                 setFetching(false);
+            });
+        axios.get(`${import.meta.env.VITE_SERVER_URL}user/${loggedInUser.email}`)
+            .then((result) => {
+                setStats(result.data);
+            })
+            .catch((error) => {
+                console.log(error);
             });
     }, [loggedInUser?.email]);
 
@@ -67,36 +81,42 @@ const ManageServices = () => {
                         allServices.map(service => <MyServiceCard key={service._id} service={service} />)
                     }
                 </motion.div>
-                {/* ✅ Quick Stats Section */}
-                <section className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10 text-center">
-                    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
-                        📊 Your Course Insights
+                {/* Quick Stats Section */}
+                <section className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10 text-center max-w-5xl mx-auto">
+                    <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center justify-center gap-2">
+                        <FaBook className="text-purple-600" /> Your Course Insights
                     </h2>
+
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div className="p-4 bg-gradient-to-r from-purple-200 to-purple-100 dark:from-purple-700 dark:to-purple-600 rounded-xl shadow">
-                            <h3 className="text-3xl font-extrabold text-purple-700 dark:text-purple-100">
-                                {allServices.length}
-                            </h3>
+                        {/* Total Courses */}
+                        <div className="p-6 bg-gradient-to-r from-purple-200 to-purple-100 dark:from-purple-700 dark:to-purple-600 rounded-xl shadow flex flex-col items-center justify-center">
+                            <FaBook size={48} className="text-purple-700 dark:text-purple-100 mb-2" />
+                            <h3 className="text-4xl font-extrabold text-purple-700 dark:text-purple-100">{stats.coursesCount}</h3>
                             <p className="text-gray-700 dark:text-gray-300 mt-1">Total Courses</p>
                         </div>
-                        <div className="p-4 bg-gradient-to-r from-pink-200 to-pink-100 dark:from-pink-700 dark:to-pink-600 rounded-xl shadow">
-                            <h3 className="text-3xl font-extrabold text-pink-700 dark:text-pink-100">
-                                1,240+
+
+                        {/* Enrolled Students */}
+                        <div className="p-6 bg-gradient-to-r from-pink-200 to-pink-100 dark:from-pink-700 dark:to-pink-600 rounded-xl shadow flex flex-col items-center justify-center">
+                            <FaUserGraduate size={48} className="text-pink-700 dark:text-pink-100 mb-2" />
+                            <h3 className="text-4xl font-extrabold text-pink-700 dark:text-pink-100 mt-0">
+                                {stats.studentsCount}
                             </h3>
                             <p className="text-gray-700 dark:text-gray-300 mt-1">Enrolled Students</p>
                         </div>
-                        <div className="p-4 bg-gradient-to-r from-blue-200 to-blue-100 dark:from-blue-700 dark:to-blue-600 rounded-xl shadow">
-                            <h3 className="text-3xl font-extrabold text-blue-700 dark:text-blue-100">
-                                4.8★
-                            </h3>
+
+                        {/* Average Rating */}
+                        <div className="p-6 bg-gradient-to-r from-blue-200 to-blue-100 dark:from-blue-700 dark:to-blue-600 rounded-xl shadow flex flex-col items-center justify-center">
+                            <FaStar size={48} className="text-blue-700 dark:text-blue-100 mb-2" />
+                            <h3 className="text-4xl font-extrabold text-blue-700 dark:text-blue-100">{stats.ratings}★</h3>
                             <p className="text-gray-700 dark:text-gray-300 mt-1">Average Rating</p>
                         </div>
                     </div>
                 </section>
-                {/* ✅ Tips Section */}
+
+                {/* Tips Section */}
                 <section className="mt-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-2xl p-8 shadow-lg">
-                    <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-100 mb-6">
-                        💡 Tips to Make Your Courses Stand Out
+                    <h2 className="flex items-center justify-center text-2xl font-bold  text-violet-500 dark:text-gray-100 mb-6">
+                        <FaLightbulb /> Tips to Make Your Courses Stand Out
                     </h2>
                     <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
                         <li>Use <b>high-quality cover images</b> to attract more learners</li>
