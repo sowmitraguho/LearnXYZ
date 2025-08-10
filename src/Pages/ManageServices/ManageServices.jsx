@@ -66,21 +66,6 @@ const ManageServices = () => {
                         Manage all your published courses & services in one place
                     </p>
                 </motion.div>
-
-                <motion.div initial="hidden"
-                    animate="visible"
-                    variants={{
-                        hidden: { opacity: 0, scale: 0.95 },
-                        visible: {
-                            opacity: 1,
-                            scale: 1,
-                            transition: { staggerChildren: 0.1 },
-                        },
-                    }} className="grid grid-cols-1 gap-4">
-                    {
-                        allServices.map(service => <MyServiceCard key={service._id} service={service} />)
-                    }
-                </motion.div>
                 {/* Quick Stats Section */}
                 <section className="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10 text-center max-w-5xl mx-auto">
                     <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center justify-center gap-2">
@@ -114,7 +99,7 @@ const ManageServices = () => {
                 </section>
 
                 {/* Tips Section */}
-                <section className="mt-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-2xl p-8 shadow-lg">
+                <section className="my-16 bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-700 dark:to-gray-800 rounded-2xl p-8 shadow-lg">
                     <h2 className="flex items-center justify-center text-2xl font-bold  text-violet-500 dark:text-gray-100 mb-6">
                         <FaLightbulb /> Tips to Make Your Courses Stand Out
                     </h2>
@@ -126,6 +111,27 @@ const ManageServices = () => {
                         <li>Encourage students to <b>leave reviews</b> after completion</li>
                     </ul>
                 </section>
+                <section>
+                    <h2 className="flex items-center justify-center text-2xl font-bold  text-violet-500 dark:text-gray-100 mb-6">
+                        Check Your Courses
+                    </h2>
+                    <motion.div initial="hidden"
+                    animate="visible"
+                    variants={{
+                        hidden: { opacity: 0, scale: 0.95 },
+                        visible: {
+                            opacity: 1,
+                            scale: 1,
+                            transition: { staggerChildren: 0.1 },
+                        },
+                    }} className="grid grid-cols-1 gap-4 ">
+                    {
+                        allServices.map(service => <MyServiceCard key={service._id} service={service} />)
+                    }
+                </motion.div>
+                </section>
+                
+                
 
 
             </div>
