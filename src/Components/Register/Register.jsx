@@ -68,7 +68,7 @@ const Register = () => {
         });
 
         // Update user profile
-        await updateUser({ displayName: name, photoURL, role });
+        await updateUser({ displayName: name, photoURL, role, email, password});
         console.log("User profile updated:", { displayName: name, photoURL, role });
       }
 

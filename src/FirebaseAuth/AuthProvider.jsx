@@ -15,7 +15,7 @@ const AuthProvider = ({children}) => {
     //add  user to  database
     const addUser = (userData) => {
         setLoading(true);
-        axios.post('https://learnxyz-server.onrender.com/user', userData)
+        axios.post(`${import.meta.env.VITE_SERVER_URL}user`, userData)
             .then(res => {
                 console.log('after adding in mogodb', res);
             })
@@ -26,13 +26,14 @@ const AuthProvider = ({children}) => {
     //get user from database
     const getUser = (email) => {
         setLoading(true);
-        return axios.get(`https://learnxyz-server.onrender.com/user/${email}`)
+        return axios.get(`${import.meta.env.VITE_SERVER_URL}user/${email}`)
             .then(res => {
                 console.log('User fetched from database', res.data);
                 return res.data;
             })
             .catch(error => {
                 console.log(error);
+                return null;
             });
     }
 
@@ -73,7 +74,8 @@ const AuthProvider = ({children}) => {
             if (currentUser) {
                 getUser(currentUser.email)
                     .then(userData => {
-                        setLoggedInUser(userData[0]);
+                        console.log('User data from database:', userData);
+                        setLoggedInUser(userData);
                     });
             } else {
                 setLoggedInUser(null);

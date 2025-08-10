@@ -35,7 +35,7 @@ const categories = [
 export default function FeaturedCategories() {
   return (
     <section className="bg-base-200 px-6 md:px-12 lg:px-24 py-16">
-      {/* ✅ Heading */}
+      {/* Heading */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
           Explore by Category
@@ -46,7 +46,7 @@ export default function FeaturedCategories() {
         </p>
       </div>
 
-      {/* ✅ Category Grid */}
+      {/* Category Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {categories.map((cat) => (
           <div
@@ -73,7 +73,7 @@ export default function FeaturedCategories() {
         ))}
       </div>
 
-      {/* ✅ View All Button */}
+      {/* View All Button */}
       <div className="text-center mt-10">
         <button className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg font-semibold hover:from-yellow-400 hover:to-orange-500 transition-all duration-300">
           View All Categories

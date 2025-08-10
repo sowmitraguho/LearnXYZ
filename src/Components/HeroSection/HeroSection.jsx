@@ -3,7 +3,7 @@ import React from 'react';
 const HeroSection = () => {
     return (
         <div>
-            {/* ✅ HERO SECTION */}
+            {/* HERO SECTION */}
       <section className="hero min-h-[70vh] bg-base-200">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
