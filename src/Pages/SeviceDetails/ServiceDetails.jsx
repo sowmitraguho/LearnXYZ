@@ -77,14 +77,11 @@ const ServiceDetails = () => {
   const handleCloseModal = () => setShowModal(false);
 
   const handleEnrollment = () => {
-    Swal.fire({
-      title: "Enrollment Successful!",
-      text: `You have enrolled in ${serviceData.serviceName}`,
-      icon: "success",
-      timer: 2000,
-    });
     handleOpenModal();
     setBooked(true);
+    
+    
+    
   };
 
   return (
@@ -93,7 +90,7 @@ const ServiceDetails = () => {
         <title>{serviceData.serviceName} | LearnX</title>
       </Helmet>
 
-      {/* ✅ HERO SECTION */}
+      {/* HERO SECTION */}
       <div className="relative w-full h-[280px] sm:h-[350px] md:h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src={serviceData.imageUrl}
@@ -122,7 +119,7 @@ const ServiceDetails = () => {
         />
       )}
 
-      {/* ✅ COURSE HIGHLIGHTS CARD */}
+      {/* COURSE HIGHLIGHTS CARD */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -169,7 +166,7 @@ const ServiceDetails = () => {
         </motion.button>
       </motion.div>
 
-      {/* ✅ COURSE DETAILS & INSTRUCTOR */}
+      {/*COURSE DETAILS & INSTRUCTOR */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -211,7 +208,7 @@ const ServiceDetails = () => {
         </div>
       </motion.div>
 
-      {/* ✅ ENROLLMENT TREND GRAPH */}
+      {/* ENROLLMENT TREND GRAPH */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -246,7 +243,7 @@ const ServiceDetails = () => {
         </div>
       </motion.div>
 
-      {/* ✅ STUDENT REVIEWS */}
+      {/* STUDENT REVIEWS */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
